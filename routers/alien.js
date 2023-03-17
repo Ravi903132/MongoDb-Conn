@@ -38,7 +38,29 @@ router.post('/', async (req,res)=>{
     }
 })
 
+router.delete('/:id', async (req,res)=>{
+    try{
+       const data= await Alien.findByIdAndDelete(req.params.id)
+       res.send(data)
+    }
+    catch(err)
+    {
+        res.send('Error' + err)
+    }
+})
 
+router.patch('/:id', async(req,res)=>{
+    try{
+       const _id = req.params.id;
+       const data = await Alien.findByIdAndUpdate(_id,req.body,{
+        new:true
+       });
+       res.send(data)
+    }catch(err)
+    {
+        res.send('Error' + err)
+    }
+})
 
 
 module.exports = router
